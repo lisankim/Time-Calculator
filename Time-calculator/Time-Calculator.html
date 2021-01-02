@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <title>Time Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <main>
+    <h1>Time Calculator</h1>
+    <body>
+      <label for="from"> Start Time</label>
+      <input type="time" id="from" />
+      <p>
+        <label for="to"> End Time</label>
+        <input type="time" id="to" />
+      </p>
+      <p>
+        <button id="calculate">Calculate</button>
+      </p>
+    </body>
+  </main>
+
+  <script src="https://momentjs.com/downloads/moment.js"></script>
+  <script>
+    function timeConvert(data) {
+      let minutes = data % 60;
+      let hours = (data - minutes) / 60;
+      return hours + ":" + minutes;
+    }
+    window.onload = function () {
+      document.getElementById("calculate").onclick = function () {
+        let from = document.getElementById("from").value;
+        let to = document.getElementById("to").value;
+        from = moment(from, "HH:mm");
+        to = moment(to, "HH:mm");
+        var duration = moment.duration(to.diff(from));
+        var minutes = duration.asMinutes();
+        alert(timeConvert(parseInt(minutes)));
+      };
+    };
+  </script>
+</html>
